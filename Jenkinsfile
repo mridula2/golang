@@ -76,6 +76,7 @@ spec:
             cd /go/src
             mkdir -p /go/src/hello-world
             cp -r ${WORKSPACE}/* /go/src/hello-world
+            cd /go/src/hello-world
             go build
             """
         }
