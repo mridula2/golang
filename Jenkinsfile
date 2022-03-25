@@ -87,10 +87,10 @@ spec:
 //             container('golang') {
 //               sh """
 //                 cd ./src
-            mkdir -p ./src/hello-world
-            cp -r /app/* ./src/hello-world
-            go clean cache
-            go test ./... -v -short
+//                 mkdir -p ./src/hello-world
+//                 cp -r /app/* ./src/hello-world
+//                 go clean cache
+//                 go test ./... -v -short
 //               """
 //             }
 //             jacoco ( 
