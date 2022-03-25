@@ -1,9 +1,7 @@
 package main
 
-import (
-   "log"
-   "net/http"
-)
+import "log"
+import "net/http"
 
 type Server struct{}
 
