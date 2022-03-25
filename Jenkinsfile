@@ -70,6 +70,8 @@ spec:
       steps {
         container('golang') {
           echo sh(script: 'env|sort', returnStdout: true)
+          echo sh(script: 'pwd', returnStdout: true)
+          echo sh(script: 'ls -a', returnStdout: true)
           sh """
             cd /go/src
             mkdir -p /go/src/hello-world
