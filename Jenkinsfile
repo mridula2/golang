@@ -9,13 +9,13 @@ pipeline {
     APP_VER = "v1.0.${BUILD_ID}"
     // HARBOR_URL = ""
     DEPLOY_GITREPO_USER = "mridula2"    
-    DEPLOY_GITREPO_URL = "github.com/${DEPLOY_GITREPO_USER}/react-dashboard-helmchart.git"
+    DEPLOY_GITREPO_URL = "github.com/${DEPLOY_GITREPO_USER}/golang-helmchart.git"
     DEPLOY_GITREPO_BRANCH = "main"
     DEPLOY_GITREPO_TOKEN = credentials('mri-github')
   }    
   agent {
     kubernetes {
-      label "react-dashboard-${myid}"
+      label "golang-${myid}"
       instanceCap 1
       defaultContainer 'jnlp'
       yaml """
@@ -71,9 +71,9 @@ spec:
         container('golang') {
           echo sh(script: 'env|sort', returnStdout: true)
           sh """
-            cd ${GOPATH}/src
-            mkdir -p ${GOPATH}/src/hello-world
-            cp -r ${WORKSPACE}/* ${GOPATH}/src/hello-world
+            cd /go/src
+            mkdir -p /go/src/hello-world
+            cp -r ${WORKSPACE}/* /go/src/hello-world
             go build
             """
         }
@@ -86,9 +86,9 @@ spec:
             echo "Unit/Integration test"
 //             container('golang') {
 //               sh """
-//                 cd ${GOPATH}/src
-//                 mkdir -p ${GOPATH}/src/hello-world
-//                 cp -r /app/* ${GOPATH}/src/hello-world
+//                 cd /go/src
+//                 mkdir -p /go/src/hello-world
+//                 cp -r /app/* /go/src/hello-world
 //                 go clean cache
 //                 go test ./... -v -short
 //               """
@@ -110,11 +110,11 @@ spec:
         stage('Static Code Analysis') {
           steps {
             echo "Sonarcube test"
-//             container('nodejs') {
+//             container('golang') {
 //               withSonarQubeEnv('My SonarQube') { 
 //                 sh """
 //                 mvn sonar:sonar \
-//                   -Dsonar.projectKey=react-dashboard \
+//                   -Dsonar.projectKey=golang \
 //                   -Dsonar.host.url=${env.SONAR_HOST_URL} \
 //                   -Dsonar.login=${env.SONAR_AUTH_TOKEN}
 //                 """
