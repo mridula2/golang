@@ -71,9 +71,9 @@ spec:
         container('golang') {
           echo sh(script: 'env|sort', returnStdout: true)
           sh """
-            cd ./src
-            mkdir -p ./src/hello-world
-            cp -r /app/* ./src/hello-world
+            cd ${GOPATH}/src
+            mkdir -p ${GOPATH}/src/hello-world
+            cp -r ${WORKSPACE}/* ${GOPATH}/src/hello-world
             go build
             """
         }
@@ -86,9 +86,9 @@ spec:
             echo "Unit/Integration test"
 //             container('golang') {
 //               sh """
-//                 cd ./src
-//                 mkdir -p ./src/hello-world
-//                 cp -r /app/* ./src/hello-world
+//                 cd ${GOPATH}/src
+//                 mkdir -p ${GOPATH}/src/hello-world
+//                 cp -r /app/* ${GOPATH}/src/hello-world
 //                 go clean cache
 //                 go test ./... -v -short
 //               """
