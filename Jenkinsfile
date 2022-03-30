@@ -28,7 +28,7 @@ spec:
   serviceAccountName: default
   containers:
   - name: golang
-    image: golang:1.8.0
+    image: golang:1.12.0
     command:
     - cat
     tty: true
@@ -72,11 +72,10 @@ spec:
           echo sh(script: 'env|sort', returnStdout: true)
           echo sh(script: 'pwd', returnStdout: true)
           echo sh(script: 'ls -a', returnStdout: true)
-          sh """
-            cd /go/src
-            mkdir -p /go/src/hello-world
-            cp -r ${WORKSPACE}/* /go/src/hello-world
-            cd /go/src/hello-world
+          sh """         
+            mkdir -p /app
+            cp -r ${WORKSPACE}/* /app
+            cd /app
             go build
             """
         }
