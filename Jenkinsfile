@@ -152,7 +152,7 @@ spec:
     }    
     stage('GitOps-based Deploy') {
       steps {
-        container('nodejs') {
+        container('golang') {
           sh """
             git config --global user.name $env.GIT_AUTHOR_NAME
             git config --global user.email $env.GIT_AUTHOR_EMAIL
