@@ -1,10 +1,6 @@
-FROM golang:alpine AS build-env
-RUN mkdir /go/src/app && apk update && apk add git
-ADD main.go /go/src/app/
-WORKDIR /go/src/app
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-extldflags "-static"' -o app .
-
-FROM scratch
+FROM golang:1.12.0-alpine3.9
+RUN mkdir /app
+ADD . /app
 WORKDIR /app
-COPY --from=build-env /go/src/app/app .
-ENTRYPOINT [ "./app" ]
+RUN go build -o main .
+CMD ["/app/main"]
